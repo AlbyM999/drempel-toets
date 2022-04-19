@@ -13,7 +13,16 @@ class Logs extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('logs', function (Blueprint $table) {
+            $table->id();
+            $table->string('action');
+            $table->string('room_id')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('platform');
+            $table->string('browser');
+            $table->string('ip_address');
+            $table->timestamps();
+        });
     }
 
     /**

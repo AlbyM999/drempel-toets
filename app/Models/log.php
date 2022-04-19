@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class room extends Model
+class log extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'room_number',
-        'name',
-        'image_path',
-        'description'
+        'action',
+        'room_id',
+        'user_id',
+        'platform',
+        'browser',
+        'ip_address',
     ];
 }
