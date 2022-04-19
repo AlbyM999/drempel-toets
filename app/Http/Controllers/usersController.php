@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\models\User;
 
-class users extends Controller
+class usersController extends Controller
 {
     public function index(){
         $UserData = User::orderBy('id')
@@ -45,8 +45,9 @@ class users extends Controller
         $id->delete();
     }
     public function login($email,$pwd){
+        $pwdHash = sha1($pwd);
         $userData=User::where('email',$email)
-        ->where('password',$pwd)
+        ->where('password',$pwdHash)
         ->get()
         ->toArray();
 

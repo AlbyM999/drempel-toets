@@ -13,7 +13,7 @@ class Reservation extends Migration
      */
     public function up()
     {
-        Schema::create('reservation', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('room_id')->refrerences('id')->on('rooms')->onDelete('cascade');
             $table->string('first_name');

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use app\Models\room;
+use app\models\reservation;
 
-class rooms extends Controller
+class reservationsController extends Controller
 {
     public function create(Request $request){
-        room::create([
+        reservation::create([
             'room_number'=>$request->room_number,
             'name'=>$request->name,
             'image_path'=>$request->image_path,
@@ -18,8 +18,8 @@ class rooms extends Controller
 
         return response()->json('Event stored');
     }
-    public function update(Request $request, room $id){
-        room::where('id',$id)->update([
+    public function update(Request $request, reservation $id){
+        reservation::where('id',$id)->update([
             'room_number'=>$request->room_number,
             'name'=>$request->name,
             'image_path'=>$request->image_path,
@@ -29,7 +29,7 @@ class rooms extends Controller
     }
     public function read(){
 
-        $RoomData = room::orderBy('id')
+        $RoomData = reservation::orderBy('id')
             ->get()
             ->toArray();
 
@@ -38,12 +38,19 @@ class rooms extends Controller
     }
     public function show($id)
     {
-        $EventData = room::where('id',$id)
+        $EventData = reservation::where('id',$id)
             ->get()
             ->toArray();
         return response()->json($EventData);
     }
-    public function delete(Request $request,room $id){
+    public function showOnRoom($id)
+    {
+        $EventData = reservation::where('room_id',$id)
+            ->get()
+            ->toArray();
+        return response()->json($EventData);
+    }
+    public function delete(Request $request,reservation $id){
         $id->delete();
 
         return response()->json('room has been deleted');
