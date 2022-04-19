@@ -1,4 +1,4 @@
-import CRUD from 'CRUD.js'
+import CRUD from './CRUD.js'
 class userCrud {
     async create(payload){
         return await CRUD.create(`/api/user`,payload)

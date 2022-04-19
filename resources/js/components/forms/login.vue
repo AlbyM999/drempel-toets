@@ -39,9 +39,9 @@ export default {
             var user = await userCRUD.login(this.password,this.email)
             if(user.data.length == 1){
                 console.log('login succesful')
-                this.$store.dispatch('getEmail',this.email)
-                this.$store.dispatch('getPassword',this.password)
-                this.$store.dispatch('getAuth',true)
+                this.$store.dispatch('setEmail',this.email)
+                this.$store.dispatch('setPassword',this.password)
+                this.$store.dispatch('setAuth',true)
 
                 this.$router.push({name:'dashboard'})
             }else{

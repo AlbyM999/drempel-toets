@@ -15,6 +15,16 @@ const routes=[
             name: 'about',
             component: About
         },
+        {
+            path: '/login',
+            name: 'login',
+            component: ()=>import(`./pages/dashboard/login.vue`)
+        },
+        {
+            path:'/dashboard',
+            name: 'dashboard',
+            component: ()=>import('./pages/dashboard/dashboard.vue'),
+        }
     ];
 
 const router = createRouter({
