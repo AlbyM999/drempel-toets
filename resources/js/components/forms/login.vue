@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         async login(){
-            var user = await userCRUD.login(this.password,this.email)
+            var user = await userCRUD.login(this.email,this.password)
             if(user.data.length == 1){
                 console.log('login succesful')
                 this.$store.dispatch('setEmail',this.email)

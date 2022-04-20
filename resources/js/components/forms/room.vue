@@ -1,27 +1,31 @@
 <template>
     <div class="roomForm">
         <form>
-            <div class="user_name">
+            <div>
+                <label>room number</label>
+                <input v-model="number" name="number" type="number">
+            </div>
+            <div >
                 <label>name</label>
-                <input v-model="name" name="email" type="email">
+                <input v-model="name" name="name" type="text">
             </div>
-            <div class="login_email">
-                <label>email</label>
-                <input v-model="email" name="email" type="email">
+            <div >
+                <label>image</label>
+                <input v-model="image" name="image" type="text">
             </div>
-            <div class="login_password">
-                <label>password</label>
-                <input v-model="password" name="password" type="password">
+            <div >
+                <label>description</label>
+                <input v-model="description" name="description" type="text">
             </div>
             <div>
-                <button @click="login()" :disabled="!email||!password" type="button">login</button>
+                <button @click="create()" :disabled="!number||!name" type="button">login</button>
                 <p v-if="message">{{msg}}</p>
             </div>
         </form>
     </div>
 </template>
 <script>
-import userCRUD from '../../controller/user'
+import roomCRUD from '../../controller/room'
 
 export default {
     computed:{
@@ -29,9 +33,10 @@ export default {
     },
     data(){
         return{
-            name:"",
-            email:"",
-            password:"",
+            number:0,
+            name:'',
+            image:"",
+            description:'',
 
             message:false,
             msg:''
@@ -42,12 +47,13 @@ export default {
     methods: {
         async create(){
             let payload = {
+                room_number:this.number,
                 name:this.name,
-                email:this.email,
-                password:this.password
+                image_path:this.image,
+                description:this.description
             }
 
-            userCRUD.create(payload).then().catch(
+            roomCRUD.create(payload).then().catch(
                 (error)=>{
                     console.error(error)
                 }

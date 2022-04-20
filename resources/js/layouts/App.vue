@@ -7,6 +7,9 @@
         <router-link to="/about">
             about
         </router-link>
+        <router-link to="/login">
+                login
+            </router-link>
     </nav>
     <div class="container">
       <router-view></router-view>

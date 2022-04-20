@@ -1,15 +1,12 @@
 <template>
-    <div class="users">
-        <userTable></userTable>
+    <div>
+        <p>welcome to the dashboard</p>
     </div>
 </template>
 <script>
 
-import userTable from '../../components/tables/users.vue'
-
 export default {
     components: {
-        userTable
     },
     computed:{
 

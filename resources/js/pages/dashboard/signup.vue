@@ -1,15 +1,15 @@
 <template>
-    <div class="users">
-        <userTable></userTable>
+    <div class="signup">
+        <userform></userform>
     </div>
 </template>
 <script>
 
-import userTable from '../../components/tables/users.vue'
+import userform from '../../components/forms/user.vue'
 
 export default {
     components: {
-        userTable
+        userform
     },
     computed:{
 

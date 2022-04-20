@@ -3,6 +3,9 @@ import {createRouter,createWebHistory} from 'vue-router';
 
 import Home from './pages/Home.vue';
 import About from './pages/About.vue';
+import dashboard from './pages/dashboard/dashboard.vue'
+
+import store from "./store/index.js";
 
 const routes=[
         {
@@ -23,7 +26,30 @@ const routes=[
         {
             path:'/dashboard',
             name: 'dashboard',
-            component: ()=>import('./pages/dashboard/dashboard.vue'),
+            component: dashboard,
+            beforeEnter: (to, from, next) => {
+                if(store.getters.auth){
+                    next()
+                }
+                next('/login')
+            },
+            children:[
+                {
+                    path:'',component:()=>import('./pages/dashboard/home.vue')
+                },
+                {
+                    path:'signup',component:()=>import('./pages/dashboard/signup.vue')
+                },
+                {
+                    path:'users',component:()=>import('./pages/dashboard/users.vue')
+                },
+                {
+                    path:'rooms',component:()=>import('./pages/dashboard/rooms.vue')
+                },
+                {
+                    path:'reservations',component:()=>import('./pages/dashboard/reservations.vue')
+                }
+            ]
         }
     ];
 

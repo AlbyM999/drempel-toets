@@ -14,7 +14,7 @@
                 <input v-model="password" name="password" type="password">
             </div>
             <div>
-                <button @click="login()" :disabled="!email||!password" type="button">login</button>
+                <button @click="create()" :disabled="!email||!password" type="button">login</button>
                 <p v-if="message">{{msg}}</p>
             </div>
         </form>
@@ -47,7 +47,12 @@ export default {
                 password:this.password
             }
 
-            userCRUD.create(payload).then().catch(
+            userCRUD.create(payload).then(
+                ()=>{
+                    this.msg = 'user created'
+                    this.message = true
+                }
+            ).catch(
                 (error)=>{
                     console.error(error)
                 }
