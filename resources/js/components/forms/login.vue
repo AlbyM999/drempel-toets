@@ -3,11 +3,11 @@
         <form>
             <div class="login_email">
                 <label>email</label>
-                <input v-model="email" name="email" type="email">
+                <input v-model="email" name="email" type="email" @keyup.enter="login()">
             </div>
             <div class="login_password">
                 <label>password</label>
-                <input v-model="password" name="password" type="password">
+                <input v-model="password" name="password" type="password" @keyup.enter="login()">
             </div>
             <div>
                 <button @click="login()" :disabled="!email||!password" type="button">login</button>

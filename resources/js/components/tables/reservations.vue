@@ -89,18 +89,19 @@ export default {
     },
     data(){
         return{
-            users:{}
+            reservations:{}
         }
     },
     computed:{
     },
     methods: {
-        async getUsers(){
-            this.users = await reservationCRUD.get()
+        async getReservations(){
+            let reservationData = await reservationCRUD.get()
+            this.reservations = reservationData.data
         }
     },
     mounted(){
-        this.getUsers()
+        this.getReservations()
     },
     created() {
 

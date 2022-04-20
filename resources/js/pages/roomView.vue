@@ -1,13 +1,8 @@
 <template>
-    <div class="reservationForm">
+    <div class="overlay" v-if="overlay">
         <form>
             <div>
-                <label>room</label>
-                <select>
-                    <option v-for="room in rooms" v-bind:key="room.id" :value='room.id'>
-                        {{ room.name }}
-                    </option>
-                </select>
+                <button type="button" @click="overlay = !overlay">cancel</button>
             </div>
             <div>
                 <label>first name</label>
@@ -35,29 +30,52 @@
             </div>
             <div>
                 <label>start</label>
-                <input v-model="start" name="start" type="date">
+                <input v-model="start" name="start" type="date" :min="today">
             </div>
             <div>
                 <label>end</label>
-                <input v-model="end" name="end" type="date">
+                <input v-model="end" name="end" type="date" :min="today">
             </div>
-            <button @click="this.create()" type="button">add</button>
+            <button @click="this.create(),overlay = !overlay,this.print()" type="button">finish</button>
         </form>
+    </div>
+    <div class="roomview">
+        <div class="header_roomview">
+            <p>{{ room.name }}</p>
+            <p>{{ room.room_number }}</p>
+        </div>
+        <div class="image">
+            <img>
+        </div>
+        <div class="description">
+            <p>{{room.description}}</p>
+        </div>
+        <div>
+            <button type="button" @click="overlay = !overlay">reserve</button>
+        </div>
     </div>
 </template>
 <script>
-import reservationCRUD from '../../controller/reservation'
 
-import roomCRUD from '../../controller/room.js'
+const today = new Date().toLocaleDateString()
+
+import reservationCRUD from '../controller/reservation'
+
+import roomCRUD from "../controller/room"
 
 export default {
+    components: {
+    },
     computed:{
 
     },
     data(){
         return{
-            rooms:[],
-            room_id:0,
+            overlay:false,
+
+            room:[],
+
+            room_id:this.ID,
             first_name:'',
             last_name:'',
             phone_number:'',
@@ -73,8 +91,13 @@ export default {
     },
     computed:{
     },
+    props:["ID"],
     methods: {
-        async create(){
+        async getRooms(){
+            let roomData = await roomCRUD.getOnId(this.ID)
+            this.room = roomData.data[0]
+        },
+         async create(){
             let payload = {
                 room_id:this.room_id,
                 first_name:this.first_name,
@@ -97,9 +120,21 @@ export default {
                 }
             )
         },
-        async getRooms(){
-            let roomsData = await roomCRUD.get().then().catch((error)=>{console.error(error)})
-            this.rooms = roomsData.data
+        print(){
+
+            let payload = {
+                room_id:this.room_id,
+                first_name:this.first_name,
+                last_name:this.last_name,
+                phone_number:this.phone_number,
+                city:this.city,
+                street:this.street,
+                postal_code:this.postal_code,
+                start:this.start,
+                end:this.end,
+            }
+
+            window.print(payload)
         }
     },
     mounted(){

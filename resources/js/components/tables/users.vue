@@ -57,7 +57,8 @@ export default {
     },
     methods: {
         async getUsers(){
-            this.users = await userCRUD.get()
+            let userData = await userCRUD.get()
+            this.users = userData.data
         }
     },
     mounted(){

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\roomsController;
 use App\Http\Controllers\usersController;
-use app\Http\Controllers\reservationsController;
+use App\Http\Controllers\reservationsController;
 use app\Http\Controllers\logsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

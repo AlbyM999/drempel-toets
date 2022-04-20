@@ -9,16 +9,16 @@
                 <label>name</label>
                 <input v-model="name" name="name" type="text">
             </div>
-            <div >
-                <label>image</label>
-                <input v-model="image" name="image" type="text">
+            <input type="file" accept="image/*" @change="onChange" />
+            <div id="preview" class="preview">
+                <img v-if="item.imageUrl" :src="item.imageUrl" />
             </div>
             <div >
                 <label>description</label>
                 <input v-model="description" name="description" type="text">
             </div>
             <div>
-                <button @click="create()" :disabled="!number||!name" type="button">login</button>
+                <button @click="create()" :disabled="!number||!name" type="button">add</button>
                 <p v-if="message">{{msg}}</p>
             </div>
         </form>
@@ -32,6 +32,7 @@ export default {
 
     },
     data(){
+        name: 'imageUpload'
         return{
             number:0,
             name:'',
@@ -39,7 +40,12 @@ export default {
             description:'',
 
             message:false,
-            msg:''
+            msg:'',
+
+            item:{
+                image : null,
+                imageUrl: null
+            }
         }
     },
     computed:{
@@ -49,7 +55,7 @@ export default {
             let payload = {
                 room_number:this.number,
                 name:this.name,
-                image_path:this.image,
+                image_path:this.item.imageUrl,
                 description:this.description
             }
 
@@ -58,6 +64,11 @@ export default {
                     console.error(error)
                 }
             )
+        },
+        onChange(e) {
+            const file = e.target.files[0]
+            this.image = file
+            this.item.imageUrl = URL.createObjectURL(file)
         }
     },
     mounted(){

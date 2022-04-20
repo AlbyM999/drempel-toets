@@ -4,26 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use app\models\reservation;
+use App\models\reservation;
 
 class reservationsController extends Controller
 {
     public function create(Request $request){
         reservation::create([
-            'room_number'=>$request->room_number,
-            'name'=>$request->name,
-            'image_path'=>$request->image_path,
-            'description'=>$request->description,
+            'room_id'=>$request->room_id,
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'phone_number'=>$request->phone_number,
+            'city'=>$request->city,
+            'street'=>$request->street,
+            'postal_code'=>$request->postal_code,
+            'start'=>$request->start,
+            'end'=>$request->end,
         ]);
 
         return response()->json('Event stored');
     }
     public function update(Request $request, reservation $id){
         reservation::where('id',$id)->update([
-            'room_number'=>$request->room_number,
-            'name'=>$request->name,
-            'image_path'=>$request->image_path,
-            'description'=>$request->description,
+            'room_id'=>$request->room_id,
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'phone_number'=>$request->phone_number,
+            'city'=>$request->city,
+            'street'=>$request->street,
+            'postal_code'=>$request->postal_code,
+            'start'=>$request->start,
+            'end'=>$request->end,
         ]
         );
     }
@@ -39,6 +49,13 @@ class reservationsController extends Controller
     public function show($id)
     {
         $EventData = reservation::where('id',$id)
+            ->get()
+            ->toArray();
+        return response()->json($EventData);
+    }
+    public function checkDate($start,$end)
+    {
+        $EventData = reservation::where('start',$start)
             ->get()
             ->toArray();
         return response()->json($EventData);
