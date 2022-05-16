@@ -1,65 +1,23 @@
 <template>
     <div class="roomsTable">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        room number
-                    </th>
-                    <th>
-                        name
-                    </th>
-                    <th>
-                        image_path
-                    </th>
-                    <th>
-                        description
-                    </th>
-                    <th>
-                        created at
-                    </th>
-                    <th>
-                        updated at
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="room in rooms" v-bind:key="room.id">
-                    <td>
-                        {{ room.id }}
-                    </td>
-                    <td>
-                        {{ room.room_number }}
-                    </td>
-                    <td>
-                        {{ room.name }}
-                    </td>
-                    <td>
-                        {{ room.description }}
-                    </td>
-                    <td>
-                        {{ room.created_at }}
-                    </td>
-                    <td>
-                        {{ room.updated_at }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <modulertable editButtons :selectedKeys="keys" :tableData="rooms" :CRUD="roomCRUD"></modulertable>
     </div>
 </template>
 <script>
 import roomCRUD from '../../controller/room'
 
+import modulertable from './modularTable.vue'
+
 export default {
+    components:{
+        modulertable
+    },
     computed:{
     },
     data(){
         return{
-            rooms:{}
+            rooms:{},
+            keys:["id","room_number","name","description","updated_at","created_at"]
         }
     },
     computed:{

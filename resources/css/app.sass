@@ -1,3 +1,5 @@
+$tableHeaderP: 0.5rem
+
 body
     padding: 0px
     margin:0px
@@ -60,3 +62,49 @@ body
 .preview
     img
         height: 20rem
+
+.tableComponent
+    background: #2c2c2c
+    padding: 1rem
+    border-radius: 0.2rem
+    .table
+        .table-header
+            .table-header-row
+                background: #fff
+                .table-header-keys
+                    padding-left: $tableHeaderP
+                    padding-right: $tableHeaderP
+        .table-body
+            .table-body-row
+                .table-body-data
+                    color: #fff
+                    text-align: center
+                button
+                    border-radius: 0.5rem
+                    border: none
+                    margin: 0.2rem
+                .update
+                    background: #126312
+                .delete
+                    background: #e01515
+.login
+    background: #cacaca
+    border-radius: 0.5rem
+    padding: 0.5rem
+    form
+        display: flex
+        flex-direction: column
+        div
+            display: flex
+            flex-direction: column
+            label
+                font-size: 1.2rem
+                text-align: center
+            input
+                border-radius: 0.5rem
+                border: none
+                padding: 0.2rem
+            button
+                border-radius: 0.5rem
+                margin: 0.2rem
+

@@ -1,56 +1,23 @@
 <template>
     <div class="usersTable">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        name
-                    </th>
-                    <th>
-                        email
-                    </th>
-                    <th>
-                        created at
-                    </th>
-                    <th>
-                        updated at
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in users" v-bind:key="user.id">
-                    <td>
-                        {{ user.id }}
-                    </td>
-                    <td>
-                        {{ user.name }}
-                    </td>
-                    <td>
-                        {{ user.email }}
-                    </td>
-                    <td>
-                        {{ user.created_at }}
-                    </td>
-                    <td>
-                        {{ user.updated_at }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <modulertable editButtons :selectedKeys="keys" :tableData="users" :CRUD="userCRUD"></modulertable>
     </div>
 </template>
 <script>
 import userCRUD from '../../controller/user'
 
+import modulertable from './modularTable.vue'
+
 export default {
     computed:{
     },
+    components:{
+        modulertable,
+    },
     data(){
         return{
-            users:{}
+            users:{},
+            keys:["id","name","email","updated_at","created_at"]
         }
     },
     computed:{
@@ -58,6 +25,7 @@ export default {
     methods: {
         async getUsers(){
             let userData = await userCRUD.get()
+            console.log(userData)
             this.users = userData.data
         }
     },
